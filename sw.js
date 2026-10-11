@@ -1,7 +1,7 @@
 /* オフライン対策：ネット優先（3秒で諦める）、つながらなければ保存しておいた版を出す */
-const CACHE = 'mt32-v2';
-const ASSETS = ['./', './index.html', './style.css?v=2', './data.js?v=2', './emblems.js?v=2', './app.js?v=2',
-  './assets/qrcode.js?v=2', './assets/emblem.png', './assets/apple-touch-icon.png', './assets/icon-192.png', './manifest.webmanifest'];
+const CACHE = 'mt32-v3';
+const ASSETS = ['./', './index.html', './style.css?v=3', './data.js?v=3', './emblems.js?v=3', './app.js?v=3',
+  './assets/qrcode.js?v=3', './assets/emblem.png', './assets/apple-touch-icon.png', './assets/icon-192.png', './manifest.webmanifest'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));

@@ -13,7 +13,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const pad = n => String(n).padStart(2, '0');
 const N_Q = QUESTIONS.length;
 const MEMO_MAX = 100, STEP_MAX = 30, NAME_MAX = 12;
-const VERSION = 'v2';
+const VERSION = 'v3';
 
 const CONSULT_FORM = {
   url: 'https://docs.google.com/forms/d/e/1FAIpQLSdm40_Asg6U6taINhawO4fp-rTKfsZSpU8hXMcgQ8JxktB6Gg/formResponse',
@@ -726,7 +726,7 @@ function buildConsultFields(ctx, form) {
     [E.time]: form.times.join('、'),
     [E.message]: form.message,
     [E.type]: `TYPE ${t.no} ${t.base.name}・${t.sub.name}`,
-    [E.axes]: AXES.map((ax, i) => `${ax.label}：${ax[t.sides[i]].name} ${t.sums[i] === 0 ? '（半々）' : t.pct[i] + '%'}`).join('\n'),
+    [E.axes]: AXES.map((ax, i) => `${ax.label}：${ax[t.sides[i]].name}${t.sums[i] === 0 ? '（半々）' : ' ' + t.pct[i] + '%'}`).join('\n'),
     [E.powers]: POWERS.map((p, i) => `${p.name} ${levelOf(pw[i])}/5`).join('\n'),
     [E.status]: STATUS.map((it, i) => (ctx.status[i] != null ? `${it.label}：${it.options[ctx.status[i]]}` : null)).filter(Boolean).join('\n') || '（未回答）',
     [E.concerns]: ctx.concerns.join('、'),
