@@ -89,11 +89,11 @@ const GLYPHS = {
 };
 
 let emblemSeq = 0;
-function emblemSVG(baseIdx, subIdx, { animate = false, ring = true } = {}) {
+function emblemSVG(baseIdx, subIdx, { animate = false, ring = true, glyphs = true } = {}) {
   const base = BASES[baseIdx], sub = SUBS[subIdx];
   const no = String(baseIdx * 4 + subIdx + 1).padStart(2, '0');
   const id = 'em' + (++emblemSeq);
-  let body = MOTIFS[base.motif] + GLYPHS[sub.key[0]](86, 153) + GLYPHS[sub.key[1]](114, 153);
+  let body = MOTIFS[base.motif] + (glyphs ? GLYPHS[sub.key[0]](86, 153) + GLYPHS[sub.key[1]](114, 153) : '');
   if (animate) {
     let i = 0;
     body = body.replace(/class="d"/g, () => `class="d" style="animation-delay:${(0.5 + (i++) * 0.09).toFixed(2)}s"`);
@@ -117,7 +117,7 @@ function emblemSVG(baseIdx, subIdx, { animate = false, ring = true } = {}) {
     ${ringText}
     <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       ${rings}${body}
-      <circle cx="100" cy="153" r="1" fill="currentColor" stroke="none"/>
+      ${glyphs ? '<circle cx="100" cy="153" r="1" fill="currentColor" stroke="none"/>' : ''}
     </g>
   </svg>`;
 }
